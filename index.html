@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengajian Annur - Cahaya Ilmu, Cahaya Hati</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8B5FBF;
+      --secondary: #6C4AB6;
+      --accent: #FF9F45;
+      --gradient: linear-gradient(135deg, #8B5FBF 0%, #6C4AB6 100%);
+      --gradient-light: linear-gradient(135deg, #9D76C1 0%, #7E5DC9 100%);
+      --bg: #F8F9FA;
+      --white: #FFFFFF;
+      --text: #333333;
+      --text-light: #666666;
+      --gray: #E0E0E0;
+      --radius: 16px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 0.8rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navbar-brand i {
+      font-size: 1.6rem;
+    }
+
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .navbar-menu li a {
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+
+    .navbar-menu li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+
+    .navbar-menu li a.active,
+    .navbar-menu li a:hover {
+      color: var(--primary);
+    }
+
+    .navbar-menu li a.active:after,
+    .navbar-menu li a:hover:after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--bg);
+      padding: 4rem 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text {
+      flex: 1 1 50%;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .hero-image {
+      flex: 0 0 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 8px solid var(--white);
+      box-shadow: var(--shadow-hover);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image:before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: var(--gradient);
+      z-index: 1;
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    /* Tentang Annur */
+    .tentang {
+      background: var(--gradient);
+      color: var(--white);
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .tentang:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .tentang-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tentang h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .tentang p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    /* Kegiatan */
+    .kegiatan {
+      background: var(--bg);
+      padding: 5rem 0;
+    }
+
+    .kegiatan h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .kegiatan-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+
+    .kegiatan-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      text-align: left;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kegiatan-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+
+    .kegiatan-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+
+    .kegiatan-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .kegiatan-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .kegiatan-card p {
+      color: var(--text-light);
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+
+    /* Map Section */
+    .map-section {
+      background: var(--white);
+      padding: 5rem 0;
+    }
+
+    .map-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gradient);
+      color: var(--white);
+      padding: 4rem 0 2rem;
+      margin-top: 0;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: space-between;
+      padding: 0 2rem 2rem;
+    }
+
+    .footer-col {
+      flex: 1 1 250px;
+      min-width: 250px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h4:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      bottom: -8px;
+      left: 0;
+    }
+
+    .footer-col p {
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: var(--white);
+      opacity: 0.9;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-col ul li a:hover {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .footer-social {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-col form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-col input[type="text"] {
+      padding: 0.8rem 1rem;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+    }
+
+    .footer-col input[type="text"]:focus {
+      outline: none;
+      background: var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .footer-col button {
+      width: 100%;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25D366;
+      color: var(--white);
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: var(--shadow-hover);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+      }
+      
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+      
+      .hero-image {
+        order: -1;
+      }
+      
+      .footer-container {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem 2rem;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        gap: 1rem;
+      }
+      
+      .navbar-menu.active {
+        display: flex;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero-text h1 {
+        font-size: 2.4rem;
+      }
+      
+      .hero-text p {
+        font-size: 1.1rem;
+      }
+      
+      .tentang h2, .kegiatan h2, .map-section h2 {
+        font-size: 2rem;
+      }
+      
+      .tentang p {
+        font-size: 1.1rem;
+      }
+      
+      .kegiatan-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+      }
+      
+      .map-container {
+        padding: 0 1rem;
+      }
+      
+      .footer-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0 1rem 2rem;
+      }
+      
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .navbar-container {
+        padding: 0 1rem;
+      }
+      
+      .hero-content {
+        padding: 0 1rem;
+      }
+      
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+      
+      .hero-image img {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .hero-image:before {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .tentang-container {
+        padding: 0 1rem;
+      }
+      
+      .map-container iframe {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <i class="fas fa-mosque"></i>
+        <span>Pengajian Annur</span>
+      </div>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="navbar-menu">
+        <li><a href="#beranda" class="active">Beranda</a></li>
+        <li><a href="#kegiatan">Kegiatan</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li><a href="#hubungi">Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="beranda">
+    <div class="hero-content">
+      <div class="hero-text fade-in">
+        <h1>Tumbuhkan Akhlak<br>Bangun Lingkungan Islami</h1>
+        <p>Pengajian An-Nur hadir sebagai sarana pembinaan ruhani untuk semua kalangan</p>
+        <div class="hero-buttons">
+          <button class="btn btn-outline" onclick="scrollToSection('lokasi')">
+            <i class="fas fa-map-marker-alt"></i>
+            Lihat Lokasi
+          </button>
+          <button class="btn btn-primary" onclick="openWhatsApp()">
+            <i class="fab fa-whatsapp"></i>
+            Tanya WA
+          </button>
+        </div>
+      </div>
+      <div class="hero-image fade-in">
+        <img src="img/aangga.png" alt="Ustadz Annur">
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang Annur -->
+  <section class="tentang">
+    <div class="tentang-container fade-in">
+      <h2>Tentang Annur</h2>
+      <p>
+        Pengajian An-Nur hadir sebagai sarana pembinaan ruhani untuk semua kalangan.<br>
+        Dibimbing oleh Ust. Angga, kegiatan kami berfokus pada pendidikan Qur'an, penguatan aqidah, dan kebersamaan dalam ibadah.<br>
+        Kami percaya bahwa ilmu agama adalah cahaya yang menerangi hati dan pikiran.<br>
+        Dengan semangat ukhuwah Islamiyah, kami bersama menciptakan lingkungan yang nyaman untuk belajar dan beribadah bersama.
+      </p>
+    </div>
+  </section>
+
+  <!-- Kegiatan -->
+  <section class="kegiatan" id="kegiatan">
+    <h2 class="fade-in">Kegiatan Kami</h2>
+    <div class="kegiatan-grid">
+      <div class="kegiatan-card fade-in">
+        <img src="img/anak.jpg" alt="Pengajian Anak">
+        <h3>Pengajian Anak</h3>
+        <p>Pengajian khusus untuk anak-anak dengan metode pembelajaran yang menyenangkan dan mudah dipahami. Dilaksanakan setiap ba'da Maghrib dengan materi dasar-dasar agama Islam.</p>
+      </div>
+      <div class="kegiatan-card fade-in">
+        <img src="img/antigalau.jpg" alt="Sholawatan Anti Galau">
+        <h3>Sholawatan Anti Galau</h3>
+        <p>Malam Jumat penuh berkah dengan dzikir dan sholawat bersama untuk menenangkan hati dan mendekatkan diri kepada Allah SWT. Menciptakan suasana spiritual yang menentramkan.</p>
+      </div>
+      <div class="kegiatan-card fade-in">
+        <img src="img/senin.jpg" alt="Tahsin & Fiqih">
+        <h3>Tahsin & Fiqih</h3>
+        <p>Pembelajaran tahsin (perbaikan bacaan Al-Qur'an) dan fiqih ibadah untuk meningkatkan kualitas ibadah sehari-hari sesuai tuntunan syariat. Dilaksanakan setiap malam Senin ba'da Isya.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section" id="lokasi">
+    <h2 class="fade-in">Lokasi Pengajian</h2>
+    <div class="map-container fade-in">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d571.9247870090035!2d107.52700354222242!3d-6.988718893763122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ee5f5a261539%3A0x7b1e2bdf3618b675!2sMesjid%20Nurul%20Hikmah!5e0!3m2!1sid!2sid!4v1759395184262!5m2!1sid!2sid" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="hubungi">
+    <div class="footer-container">
+      <div class="footer-col fade-in">
+        <h4>Pengajian Annur</h4>
+        <p>Pengajian An-Nur hadir sebagai sarana pembinaan ruhani untuk semua kalangan.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col fade-in">
+        <h4>Sitemap</h4>
+        <ul>
+          <li><a href="#beranda"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+          <li><a href="#kegiatan"><i class="fas fa-chevron-right"></i> Kegiatan</a></li>
+          <li><a href="#lokasi"><i class="fas fa-chevron-right"></i> Lokasi</a></li>
+          <li><a href="#hubungi"><i class="fas fa-chevron-right"></i> Hubungi Kami</a></li>
+        </ul>
+      </div>
+      <div class="footer-col fade-in">
+        <h4>Hubungi Kami</h4>
+        <form id="waForm">
+          <input type="text" id="waMessage" placeholder="Tulis pesan Anda..." required>
+          <button type="submit" class="btn btn-primary">
+            <i class="fab fa-whatsapp"></i>
+            Kirim via WA
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 Pengajian Annur. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/6282111444049" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navbarMenu = document.querySelector('.navbar-menu');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      navbarMenu.classList.toggle('active');
+      const icon = this.querySelector('i');
+      if (navbarMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.navbar-menu a').forEach(link => {
+      link.addEventListener('click', function() {
+        navbarMenu.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+      });
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Scroll to section function
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+    
+    // WhatsApp form handler
+    document.getElementById('waForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = document.getElementById('waMessage').value.trim();
+      if (msg) {
+        const phone = '6282111444049';
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+        document.getElementById('waMessage').value = '';
+      }
+    });
+    
+    // Open WhatsApp function
+    function openWhatsApp() {
+      const phone = '6282111444049';
+      const url = `https://wa.me/${phone}`;
+      window.open(url, '_blank');
+    }
+    
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Set active nav link based on scroll position
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.navbar-menu a');
+      
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 100)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
